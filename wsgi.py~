@@ -1,0 +1,11 @@
+CONFIG = {
+    'mode': 'wsgi',
+    'working_dir': '/home/stepan/ask/ask_filatov',
+    'python': '/usr/bin/python',
+    'args': (
+        '--bind=127.0.0.1:8001',
+        '--workers=16',
+        '--timeout=60',
+        'hw_wsgi:application',
+    ),
+}
