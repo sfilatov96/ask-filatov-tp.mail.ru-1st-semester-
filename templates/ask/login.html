@@ -1,0 +1,36 @@
+{% extends "ask/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	
+	<h1 class="question">Авторизация</h1><h3 class="question"><small>Если вы являетесь пользовотелем и хотите задать вопрос анонимно,то поставьте галочку в пункте анонимный вопрос.
+	<hr>
+	<br>
+	{% if mistake %}
+	<div class="alert alert-danger" role="alert">
+	<strong>Sorry!</strong>{{mistake}}
+	</div>
+	{%endif%}
+	<form class="form-horizontal" method = "POST">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+			<div class="form-group  {% if field.errors %}has-error {% endif%}">
+				<label for="{{field.name}}" class="col-sm-2 control-label">{{field.label}}:</label>
+				<div class="col-sm-10">
+					{{field}}<br>
+					{% if field.errors %}<p>Поле не заполнено</p> {% endif%}
+				</div>
+			</div>
+		{% endfor %}		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Войти</button>
+			</div>
+		</div>
+	</form>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+{% endblock %}
+

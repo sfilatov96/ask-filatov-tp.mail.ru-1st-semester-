@@ -1,0 +1,87 @@
+{% extends "ask/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<h1 class="question">Вопрос:{{qnum}}</h1>
+	<table class="table table-striped">
+		<tr>
+			<td>
+			 <div class="row">
+				  <div class="col-md-3">
+				  <img src="http://lorempixel.com/100/100/" class="img-circle question_photo" ><br><h4>{{q.user}}</h4>
+				  <br>
+				   <button type="button" class="btn btn-success btn-xs">
+				  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Одобряю
+					</button>
+				   <button type="button" class="btn btn-danger btn-xs">
+				  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Разочарован
+					</button>
+					<br>
+					<br>
+					<p>Рейтинг участника:34</p>
+				  </div>
+				  <div class="col-md-8"><h3 class="question">{{q.title}}<br><small>{{q.created}}</small></h3><br><p class="question">
+				   {{q.text}}</p>
+				  <br>
+				  <p><a href="#"><p class="question">Ответов(5)</a>
+				  Тэги: <a href="#">#Фильмы</a><a href="#">#Премьера</a></p>
+				 
+				  </div>
+			</div>
+			</td>
+		</tr>
+	</table>
+	<h2>Ответы:<small>Страница{{page}}</h2>
+	
+	<table class="table table-striped">
+		{% for a in answers %}
+		<tr>
+			<td>
+			 <div class="row">
+				  <div class="col-md-3"></div>
+				  <div class="col-md-3">
+				  <img src="http://lorempixel.com/80/80/" class="img-circle question_photo" ><br><h4>Автор</h4>
+				  <br>
+				   <button type="button" class="btn btn-success btn-xs">
+				  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Одобряю
+					</button>
+				   <button type="button" class="btn btn-danger btn-xs">
+				  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Разочарован
+					</button>
+					<br>
+					<br>
+					<p>Рейтинг участника:{{a.id}}</p>
+				  </div>
+				  <div class="col-md-6"><h4 class="question"><small>3 Октября 2014</small></h4><br><p class="question">
+				  {{a}}
+				  </p>
+				  <br>
+				  </div>
+			</div>
+			</td>
+		</tr>
+		{% endfor %}
+	
+	</table>
+	<hr>
+	<form class="form-horizont answer_form">
+	<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Ваш ответ:</label>
+			<textarea class="form-control ask_message" rows="8"></textarea>
+	</div>
+	<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Ответить</button>
+			</div>
+	</div>
+	</form>
+	<nav>
+		<ul class="pagination">
+		<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+		<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+	
+		</ul>
+	</nav>
+{% endblock %}	
+		
+  
+

@@ -1,0 +1,56 @@
+{% extends "ask/base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+	  
+	 
+{% block content %}
+<h1 class="question">Вопросы:{{page}}</h1><h3 class="question"><small>Добро пожаловать на сайт умных и глупых вопросов.На этой странице вы
+	можете посмотреть ответы на уже заданные вопросы.Если вы хотите  отвечать на вопросы
+	гостей сайта,то необходимо зарегистрироваться. Для прохождения регистрации, пожалуйста, пройдите по<a href="register.html"> ссылке</a> </small></h3><br>
+<h3>{{title}}<small>{{tag}}</small></h3>
+{% for q in questions %}
+	<table class="table table-striped">
+			<tr>
+				<td>
+				 <div class="row">
+					  <div class="col-md-3">
+					  <img src="http://lorempixel.com/100/100/" class="img-circle question_photo" ><br><h4>{{q.user}}</h4>
+					  <br>
+					   <button type="button" class="btn btn-success btn-xs">
+					  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Одобряю
+						</button>
+					   <button type="button" class="btn btn-danger btn-xs">
+					  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Разочарован
+						</button>
+						<br>
+						<br>
+						<p>Рейтинг участника:{{user.rating}}</p>
+						<p>Рейтинг вопроса:{{q.rating}}</p>
+					  </div>
+					  <div class="col-md-8"><a href="{% url 'question' q.id  %}"><h3 class="question">{{q.title}}<br><small>{{q.created}}</small></h3></a><br><p class="question">
+					  {{q.text}}
+					  </p>
+					  <br>
+					  <p><a href="question.html"><p class="question">Ответов(5){{q.id}}</a>
+					  Тэги: {% for t in q.tags.all %}<a href="{% url 'tag' t.name %}">{{t.name}} </a>{% endfor %}</p>
+					 
+					  </div>
+				</div>
+				</td>
+			</tr>
+		</table>
+	{% endfor %}
+{% endblock %}
+{% block paginator %}
+
+		<nav>
+		<ul class="pagination">
+		<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+		{% for p in page %}
+		<li ><a href="#">{{p}} <span class="sr-only">(current)</span></a></li>
+		{% endfor %}
+		<li ><a href="{% url 'index' page %}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li> 
+		</ul>
+		</nav>
+{% endblock %}

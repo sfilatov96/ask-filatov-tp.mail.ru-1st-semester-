@@ -1,0 +1,40 @@
+from django.db import models
+from django.contrib.auth.models import User
+import datetime
+# Create your models here.
+class QuestionManager(models.Manager):
+	def newest(self):
+		return self.order_by('-id')
+	def hot(self):
+		return self.order_by('-rating')
+
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    def __unicode__(self):
+		return self.name
+class Profile(User):
+	avatar= models.ImageField(upload_to="/uploads/")
+	objects = UserManager()
+	def __unicode__(self):
+		return self.username
+class Question(models.Model):
+	user = models.ForeignKey(Profile)
+	title = models.CharField(max_length = 255)
+	tags = models.ManyToManyField(Tag)
+	text = models.TextField()
+	rating = models.IntegerField(default=0,db_index = True)
+	created = models.DateTimeField(default=datetime.datetime.now)
+	objects = QuestionManager()
+	def __unicode__(self):
+		return self.title
+
+
+class Andwer(models.Model):
+	user = models.ForeignKey(Profile)
+	question = models.ForeignKey(Question)
+	text = models.TextField()
+	created = models.DateTimeField(default=datetime.datetime.now)
+	def __unicode__(self):
+		return self.text		
