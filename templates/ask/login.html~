@@ -1,0 +1,36 @@
+{% extends "ask/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="container main_field">
+	<h1 class="question">Авторизация</h1><h3 class="question"><small>Если вы являетесь пользовотелем и хотите задать вопрос анонимно,то поставьте галочку в пункте анонимный вопрос.
+	<hr>
+	
+	<div class="alert alert-danger" role="alert"><p>Пароль или логин введен неверно</p></div>
+	<br>
+	<form class="form-horizontal log_in">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Логин:</label>
+			<div class="col-sm-10">
+				<input type="email" class="form-control" id="inputEmail3" placeholder="Ivan1234">
+			</div>
+		</div>
+		<br>
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Пароль:</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="inputEmail3">
+			</div>
+		</div>
+		<br>
+		
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Войти</button>
+			</div>
+		</div>
+		<br>
+	</form>
+	</div>
+{% endblock %}
+

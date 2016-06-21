@@ -1,0 +1,36 @@
+{% extends "ask/index.html" %}
+{% load staticfiles %}
+{% block content %}
+	{% for q in questions %}
+	<table class="table table-striped">
+			<tr>
+				<td>
+				 <div class="row">
+					  <div class="col-md-3">
+					  <img src="http://lorempixel.com/100/100/" class="img-circle question_photo" ><br><h4>Автор</h4>
+					  <br>
+					   <button type="button" class="btn btn-success btn-xs">
+					  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Одобряю
+						</button>
+					   <button type="button" class="btn btn-danger btn-xs">
+					  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Разочарован
+						</button>
+						<br>
+						<br>
+						<p>Рейтинг участника:34</p>
+					  </div>
+					  <div class="col-md-8"><h3 class="question">А что ,если рассказать вам про фильм Эверест<br><small>3 Октября 2014</small></h3><br><p class="question">
+					  Эверест — великая неприступная гора, покорить вершину которой мечтают многие профессиональные скалолазы. 
+					  Одна из экспедиций на её вершину закончилась настоящей трагедией, однако этот факт не останавливает отважных альпинистов.
+					  </p>
+					  <br>
+					  <p><a href="question.html"><p class="question">Ответов(5)</a>
+					  Тэги: <a href="#">#Фильмы</a><a href="#">#Премьера</a></p>
+					 
+					  </div>
+				</div>
+				</td>
+			</tr>
+		</table>
+	{% endfor %}
+{% endblock %}

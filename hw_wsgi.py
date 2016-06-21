@@ -1,6 +1,6 @@
 def application(environ, start_response):
 	post_env = environ.copy()
-	data = "Hi there!\nYou passed in the following GET data:\n" + post_env['QUERY_STRING'] + "\nand POST data:";
+	data = "\nWSGI hello world!!\n GET data:\n" + post_env['QUERY_STRING'] + "\nand POST data:";
 	post_env['QUERY_STRING'] = ''
 	post = environ['wsgi.input'].read(int(environ.get('CONTENT_LENGTH', '0')))
 	data += post

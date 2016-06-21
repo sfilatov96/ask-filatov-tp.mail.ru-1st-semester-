@@ -1,0 +1,7 @@
+{% extends "ask/base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% for q in questions %}
+ {{q}}<br>
+{% endfor %}
+{% endblock %}

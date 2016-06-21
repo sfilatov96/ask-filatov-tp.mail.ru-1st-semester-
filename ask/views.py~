@@ -1,0 +1,70 @@
+from django.shortcuts import render
+from django.http import HttpResponse,Http404
+from django.core.paginator import Paginator, EmptyPage
+from ask.paginator import paginate
+from ask.models import Question, Andwer
+import json
+
+
+pointer= 'class=active'
+
+title= 'Tag:'
+def index(request, page=None):
+	#pager =Paginator(questions, 4)
+	
+	#qlist = pager.page(page or 1)
+	try:
+		questions=Question.objects.newest()
+	except Question.DoesNotExist:
+		raise Http404
+	questions_on_page = paginate(questions, request, 4, page)
+	return render(request,'ask/index.html',{
+		'questions':questions_on_page,
+		'page' : page
+		}
+	)
+def question(request, page=None, qnum=None):
+	try:
+        	q = Question.objects.get(id=qnum)
+	except Question.DoesNotExist:
+        	raise Http404
+	answers = Andwer.objects.filter(question=qnum)
+	answer_on_page = paginate(answers, request, 4, page)
+	return render(request,'ask/question.html',{
+		'answers':answer_on_page,
+		'qnum':qnum,
+		'page' : page,
+		'q':q
+		}
+	)
+def tag(request, page=None, tag=None):
+	question_on_page = paginate(answers, request, 4, page)
+	return render(request,'ask/index.html',{
+		'questions':question_on_page,
+		'title':title,
+		'tag':tag,
+		'page' : page
+		}
+	)
+def hot(request, page=None):
+	questions=Question.objects.hot()
+	question_on_page = paginate(questions, request, 4, page)
+	return render(request,'ask/index.html',{
+		'questions':question_on_page,
+		'pointer_hot':pointer,
+		'page' : page,
+		}
+	)
+
+def login(request):
+	return render(request,'ask/login.html',{'pointer_login':pointer})
+
+
+def register(request):
+	return render(request,'ask/register.html',{'pointer_register':pointer})
+
+
+def ask(request):
+	return render(request,'ask/ask.html',{'pointer_ask':pointer})
+
+
